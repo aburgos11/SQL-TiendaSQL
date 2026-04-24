@@ -60,7 +60,46 @@ public class ProductView {
 	}
 
 	private void modificarProducto() {
+		System.out.println("Escribe el nombre del producto que quieres actualizar: ");
+		String nombre = sc.nextLine();
+		System.out.println("¿Qué quieres actualizar?");
+		System.out.println("1. Actualizar precio.");
+		System.out.println("2. Actualizar stock.");
+		System.out.println("Actualizar los dos.");
+		int opcion = sc.nextInt();
+		sc.nextLine();
 
+		switch (opcion) {
+			case 1 -> {
+				System.out.println("Escribe el nuevo precio");
+				Double precio = sc.nextDouble();
+				if(this.productoDAO.actualizarPrecio(nombre, precio)) {
+					System.out.println("Precio actualizado correctamente");
+				} else {
+					System.out.println("Ha ocurrido un error!");
+				}
+			}
+			case 2 -> {
+				System.out.println("Escribe el nuevo stock");
+				int stock = sc.nextInt();
+				if(this.productoDAO.actualizarStock(nombre, stock)) {
+					System.out.println("Stock actualizado correctamente");
+				} else {
+					System.out.println("Ha ocurrido un error!");
+				}
+			}
+			case 3 -> {
+				System.out.println("Escribe el nuevo precio");
+				Double precio = sc.nextDouble();
+				System.out.println("Escribe el nuevo stock");
+				int stock = sc.nextInt();
+				if(this.productoDAO.actualizarPrecio(nombre, precio) && this.productoDAO.actualizarStock(nombre, stock)) {
+					System.out.println("Precio y stock actualizado correctamente");
+				} else {
+					System.out.println("Ha ocurrido un error!");
+				}
+			}
+		}
 	}
 
 	private void eliminarProducto() {

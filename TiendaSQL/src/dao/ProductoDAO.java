@@ -76,4 +76,40 @@ public class ProductoDAO {
 		return false;
 	}
 
+	public boolean actualizarPrecio(String nombre, Double precio) {
+		String sql = "UPDATE productos SET precio = ? WHERE nombre = ?";
+
+		try (Connection conn = Conexion.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, nombre);
+			pstmt.setDouble(2, precio);
+
+			return pstmt.executeUpdate() > 0;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	public boolean actualizarStock(String nombre, int stock) {
+		String sql = "UPDATE productos SET stock = ? WHERE nombre = ?";
+
+		try (Connection conn = Conexion.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, nombre);
+			pstmt.setInt(2, stock);
+
+			return pstmt.executeUpdate() > 0;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
 }
