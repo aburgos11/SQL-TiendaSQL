@@ -1,9 +1,9 @@
 package views;
 
-import java.util.Scanner;
-import java.util.List;
-import models.Producto;
 import dao.ProductoDAO;
+import java.util.List;
+import java.util.Scanner;
+import models.Producto;
 
 public class ProductView {
 	private Scanner sc = new Scanner(System.in);
@@ -16,16 +16,30 @@ public class ProductView {
 		do {
 			opcion = this.mostrarMenu();
 			switch(opcion) {
-			case 1 -> {
-				this.listarProductos();
-			}
-			case 2 -> {
-				this.addProducto();
-			}
+				case 1 -> {
+					this.listarProductos();
+				}
+				case 2 -> {
+					this.addProducto();
+				}
+				case 3 -> {
+					this.modificarProducto();
+				}
+				case 4 -> {
+					this.eliminarProducto();
+				}
 			}			
 		} while (opcion != 5);
 	}
 	
+	private void listarProductos() {
+		List<Producto> productos = this.productoDAO.getAll();
+
+		for (Producto p : productos) {
+			System.out.println(p);
+		}
+		
+	}
 	
 	private void addProducto() {
 		System.out.println("Introduce un nombre: ");
@@ -45,14 +59,21 @@ public class ProductView {
 
 	}
 
-	private void listarProductos() {
-		List<Producto> productos = this.productoDAO.getAll();
+	private void modificarProducto() {
 
-		for (Producto p : productos) {
-			System.out.println(p);
-		}
-		
 	}
+
+	private void eliminarProducto() {
+		System.out.println("Introduce el nombre del producto que quieres eliminar: ");
+		String nombre = sc.nextLine();
+
+		if(this.productoDAO.deleteProducto(nombre)) {
+			System.out.println("Producto eliminado correctamente");
+		} else {
+			System.out.println("Ha ocurrido un error!");
+		}
+	}
+
 
 
 	private int mostrarMenu() {
