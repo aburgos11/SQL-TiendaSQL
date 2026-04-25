@@ -1,13 +1,15 @@
 package models;
 
+import java.time.LocalDate;
+
 public class Pedido {
     private int id;
     private Cliente cliente;
     private Producto producto;
     private int cantidad;
-    private String fecha;
+    private LocalDate fecha;
 
-    public Pedido(Cliente cliente, Producto producto, int cantidad, String fecha) {
+    public Pedido(Cliente cliente, Producto producto, int cantidad, LocalDate fecha) {
         this.id = 0;
         this.cliente = cliente;
         this.producto = producto;
@@ -47,11 +49,11 @@ public class Pedido {
         this.cantidad = cantidad;
     }
 
-    public String getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
