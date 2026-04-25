@@ -1,5 +1,6 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import models.Pedido;
@@ -23,7 +24,7 @@ public class PedidoDAO {
         return false;
     }
 
-    public boolean actualizarPedido() {
+    public boolean actualizarPedido(int id_pedido, int cantidad, LocalDate fecha) {
 
 
 

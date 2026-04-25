@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
 	id_cliente INT,
 	id_producto INT,
 	cantidad INT,
-	fecha VARCHAR(10),
+	fecha DATE,
 	FOREIGN KEY id_cliente REFERENCES cliente(id),
 	FOREIGN KEY id_producto REFERENCES producto(id)
 );

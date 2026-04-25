@@ -1,6 +1,8 @@
 package views;
 
 import dao.PedidoDAO;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import models.Cliente;
@@ -71,8 +73,7 @@ public class PedidoView {
 		System.out.println("Introduce la cantidad: ");
 		int cantidad = sc.nextInt();
 		sc.nextLine();
-		System.out.println("Introduce la fecha: ");
-		String fecha = sc.nextLine();
+		LocalDate fecha = LocalDate.now();
 		
 		Pedido p = new Pedido(cliente, producto, cantidad, fecha);
 				
@@ -85,21 +86,64 @@ public class PedidoView {
     }
 	
 	
-    private void modificarPedido() {
-		
+    private void modificarPedido() { // No se puede modificar ni el id, ni el cliente, ni el producto ya que sería cancelarlo. La fecha es automática. Se puede modificar la cantidad del producto
+		System.out.println("¿Para qué cliente quieres modificar el pedido? Ingresa su DNI");
+		String dni = sc.nextLine();
+		Cliente cliente = clienteView.buscarCliente(dni);
+		int id_pedido= buscarPedidoModificar(cliente);
+		System.out.println("Ingresa la nueva cantidad deseada. En caso de querer cancelar el pedido ve al apartado 'candelar pedido'");
+		int cantidad = sc.nextInt();
+		sc.nextLine();
+		LocalDate fecha = LocalDate.now();
+
+		if(this.pedidoDAO.actualizarPedido(id_pedido, cantidad, fecha)) {
+			System.out.println("Precio actualizado correctamente");
+		} else {
+			System.out.println("Ha ocurrido un error!");
+		}
+
 	}
 	
 	
     private void cancelarPedido() {
-		
 	}
 
-	private void buscarCliente(String dni) {
+	private Integer buscarPedidoModificar(Cliente cliente) {
 
+		List<Pedido> pedidos = this.pedidoDAO.listarPedidos();
+		List<Pedido> pedidosEncontrados = new ArrayList<>();
+
+		for (Pedido p : pedidos) {
+			if(p.getCliente() == cliente) {
+				pedidosEncontrados.add(p);
+			}
+		}
+
+		if(!pedidosEncontrados.isEmpty()) {
+			System.out.println("Estos son los pedidos de este cliente que hemos encontrado:");
+			int contador = 1;
+			for (Pedido p: pedidosEncontrados) {
+				System.out.println(contador+ ". " + p);
+				contador ++;
+			}
+			System.out.println("¿Qué pedido quieres modificar?");
+			int opcion = sc.nextInt();
+			sc.nextLine();
+			
+			if (opcion -1 > pedidosEncontrados.size() || opcion -1 < 0) {
+				System.out.println("No hay una opcion " + opcion);
+			} else {
+				Pedido pedido = pedidosEncontrados.get(opcion -1);
+				int id_pedido = pedido.getId();
+				return id_pedido;
+			}
+		} else {
+			System.out.println("No se han encontrado pedidos para este cliente");
+		}
+		return null;
 	}
 
 	
-    
     
 	
 }
