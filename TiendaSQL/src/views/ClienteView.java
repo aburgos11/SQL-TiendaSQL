@@ -1,8 +1,8 @@
 package views;
 
-import java.util.Scanner;
-import java.util.List;
 import dao.ClienteDAO;
+import java.util.List;
+import java.util.Scanner;
 import models.Cliente;
 
 public class ClienteView {
