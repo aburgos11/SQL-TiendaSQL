@@ -6,6 +6,8 @@ public class GestorTienda {
 	
 	public static Scanner sc = new Scanner(System.in);
 	public static ProductView productview = new ProductView();
+	public static ClienteView clienteview = new ClienteView();
+	public static PedidoView pedidoview = new PedidoView();
 
 	public static void main(String[] args) {
 		
@@ -20,10 +22,16 @@ public class GestorTienda {
 				case 1 -> {
 					productview.iniciar();
 				}
+				case 2 -> {
+					clienteview.iniciar();
+				}
+				case 3 -> {
+					pedidoview.iniciar();
+				}
 			
 			}
 		
-		} while(opcion != 4);
+		} while(opcion != 4);	
 		
 	}
 

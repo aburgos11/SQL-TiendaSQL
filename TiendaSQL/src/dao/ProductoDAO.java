@@ -1,13 +1,13 @@
 package dao;
 
-import java.util.List;
-import java.util.ArrayList;
-import models.Producto;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
+import models.Producto;
 
 public class ProductoDAO {
 
@@ -58,5 +58,60 @@ public class ProductoDAO {
 		
 		return false;
 	}
+
+	public boolean deleteProducto(String nombre) {
+		String sql = "DELETE FROM productos WHERE nombre = ?";
+
+		try (Connection conn = Conexion.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, nombre);
+
+			return pstmt.executeUpdate() > 0;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	public boolean actualizarPrecio(String nombre, Double precio) {
+		String sql = "UPDATE productos SET precio = ? WHERE nombre = ?";
+
+		try (Connection conn = Conexion.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setDouble(1, precio);
+			pstmt.setString(2, nombre);
+
+			return pstmt.executeUpdate() > 0;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	public boolean actualizarStock(String nombre, int stock) {
+		String sql = "UPDATE productos SET stock = ? WHERE nombre = ?";
+
+		try (Connection conn = Conexion.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, stock);
+			pstmt.setString(2, nombre);
+
+			return pstmt.executeUpdate() > 0;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+
 
 }
