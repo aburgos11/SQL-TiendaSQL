@@ -132,6 +132,18 @@ public class ClienteView {
 			System.out.println("Ha ocurrido un error!");
 		}
     }
+
+
+	public Cliente buscarCliente(String dni) {
+		List<Cliente> clientes = this.clienteDAO.listarClientes();
+
+		for (Cliente c : clientes) {
+			if(c.getDni().equalsIgnoreCase(dni)) {
+				return c;
+			}
+		}
+		return null;
+	}
     
     
 

@@ -127,5 +127,16 @@ public class ProductView {
 		
 		return opcion;
 	}
+
+	public Producto buscarProducto(String nombreProducto) {
+		List<Producto> productos = this.productoDAO.getAll();
+
+		for (Producto p : productos) {
+			if(p.getNombre().equalsIgnoreCase(nombreProducto)) {
+				return p;
+			}
+		}
+		return null;
+	}
 	
 }
