@@ -82,8 +82,8 @@ public class ProductoDAO {
 		try (Connection conn = Conexion.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, nombre);
-			pstmt.setDouble(2, precio);
+			pstmt.setDouble(1, precio);
+			pstmt.setString(2, nombre);
 
 			return pstmt.executeUpdate() > 0;
 			
@@ -100,8 +100,8 @@ public class ProductoDAO {
 		try (Connection conn = Conexion.getConnection()) {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, nombre);
-			pstmt.setInt(2, stock);
+			pstmt.setInt(1, stock);
+			pstmt.setString(2, nombre);
 
 			return pstmt.executeUpdate() > 0;
 			
