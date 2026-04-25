@@ -65,7 +65,7 @@ public class ProductView {
 		System.out.println("¿Qué quieres actualizar?");
 		System.out.println("1. Actualizar precio.");
 		System.out.println("2. Actualizar stock.");
-		System.out.println("Actualizar los dos.");
+		System.out.println("3. Actualizar los dos.");
 		int opcion = sc.nextInt();
 		sc.nextLine();
 

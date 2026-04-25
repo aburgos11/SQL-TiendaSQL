@@ -1,5 +1,9 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import models.Cliente;
@@ -8,8 +12,28 @@ public class ClienteDAO {
 
     public List<Cliente> listarClientes() {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "";
+        String sql = "SELECT * FROM clientes";
 
+        try (Connection conn = Conexion.getConnection()) {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				Cliente c = new Cliente(
+					rs.getInt("id"), 
+					rs.getString("dni"), 
+					rs.getString("nombre"),
+					rs.getString("telefono"),
+                    rs.getString("direccion")
+				);
+				
+				clientes.add(c);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
         return clientes;
     }
@@ -22,7 +46,14 @@ public class ClienteDAO {
         return false;
     }
 
-    public boolean modificarCliente() {
+    public boolean modificarTelefono(String dni, String telefono) {
+
+
+
+        return false;
+    }
+
+    public boolean modificarDireccion(String dni, String direccion) {
 
 
 
