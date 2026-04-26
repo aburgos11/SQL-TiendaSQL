@@ -52,9 +52,16 @@ public class ClienteView {
     private void listarClientes() {
 		List<Cliente> clientes = this.clienteDAO.listarClientes();
 
-		for (Cliente c : clientes) {
-			System.out.println(c);
+		if(!clientes.isEmpty()) {
+			
+			for (Cliente c : clientes) {
+				System.out.println(c);
+			}
+
+		} else {
+			System.out.println("No hay clientes registrados actualmente");
 		}
+
     }
 
 

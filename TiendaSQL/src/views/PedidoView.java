@@ -54,9 +54,16 @@ public class PedidoView {
 	private void listarPedidos() {
 		List<Pedido> pedidos = this.pedidoDAO.listarPedidos();
 
-		for (Pedido p : pedidos) {
-			System.out.println(p);
+		if(!pedidos.isEmpty()) {
+			
+			for (Pedido p : pedidos) {
+				System.out.println(p);
+			}
+
+		} else {
+			System.out.println("No hay pedidos registrados actualmente");
 		}
+
 	}
 
 	private void addPedido() {

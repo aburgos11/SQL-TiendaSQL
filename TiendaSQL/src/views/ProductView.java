@@ -35,9 +35,16 @@ public class ProductView {
 	private void listarProductos() {
 		List<Producto> productos = this.productoDAO.getAll();
 
-		for (Producto p : productos) {
-			System.out.println(p);
+		if(!productos.isEmpty()) {
+
+			for (Producto p : productos) {
+				System.out.println(p);
+			}
+
+		} else {
+			System.out.println("No hay productos actualmente");
 		}
+
 		
 	}
 	
