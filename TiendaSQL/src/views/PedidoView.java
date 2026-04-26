@@ -1,6 +1,7 @@
 package views;
 
 import dao.PedidoDAO;
+import dao.ProductoDAO;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,13 +79,24 @@ public class PedidoView {
 		sc.nextLine();
 		LocalDate fecha = LocalDate.now();
 
+		
 		Pedido p = new Pedido(cliente, producto, cantidad, fecha);
+		int stockActual = producto.getStock();
+		
+		if(stockActual >= cantidad) {
 
-		if (this.pedidoDAO.addPedido(p)) {
-			System.out.println("Pedido agregado correctamente");
+			if (this.pedidoDAO.addPedido(p)) {
+				int nuevoStock = stockActual - cantidad;
+				ProductoDAO.actualizarStock(nombreProducto, nuevoStock);
+				System.out.println("Pedido agregado correctamente");
+			} else {
+				System.out.println("Ha ocurrido un error!");
+			}
+
 		} else {
-			System.out.println("Ha ocurrido un error!");
+			System.out.println("No hay stock suficiente para realizar este pedido");
 		}
+		
 
 	}
 

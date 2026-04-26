@@ -94,7 +94,7 @@ public class ProductoDAO {
 		return false;
 	}
 
-	public boolean actualizarStock(String nombre, int stock) {
+	public static boolean actualizarStock(String nombre, int stock) {
 		String sql = "UPDATE productos SET stock = ? WHERE nombre = ?";
 
 		try (Connection conn = Conexion.getConnection()) {
