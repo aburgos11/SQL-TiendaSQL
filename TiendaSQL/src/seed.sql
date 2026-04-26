@@ -23,6 +23,6 @@ CREATE TABLE IF NOT EXISTS pedidos (
 	id_producto INT,
 	cantidad INT,
 	fecha DATE,
-	FOREIGN KEY id_cliente REFERENCES cliente(id),
-	FOREIGN KEY id_producto REFERENCES producto(id)
+	FOREIGN KEY (id_cliente) REFERENCES clientes(id),
+	FOREIGN KEY (id_producto) REFERENCES productos(id)
 );
