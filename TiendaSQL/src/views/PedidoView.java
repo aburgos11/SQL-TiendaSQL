@@ -81,15 +81,15 @@ public class PedidoView {
 
 	}
 
-	private void modificarPedido() { // No se puede modificar ni el id, ni el cliente, ni el producto ya que sería
-										// cancelarlo. La fecha es automática. Se puede modificar la cantidad del
-										// producto
+	private void modificarPedido() { 
+		/*No se puede modificar ni el id, ni el cliente, ni el producto ya que sería cancelarlo.
+		La fecha es automática. Se puede modificar la cantidad del producto */
+		
 		System.out.println("¿Para qué cliente quieres modificar el pedido? Ingresa su DNI");
 		String dni = sc.nextLine();
 		Cliente cliente = clienteView.buscarCliente(dni);
 		int id_pedido = buscarPedidoModificar(cliente);
-		System.out.println(
-				"Ingresa la nueva cantidad deseada. En caso de querer cancelar el pedido ve al apartado 'candelar pedido'");
+		System.out.println("Ingresa la nueva cantidad deseada. En caso de querer cancelar el pedido ve al apartado 'candelar pedido'");
 		int cantidad = sc.nextInt();
 		sc.nextLine();
 		LocalDate fecha = LocalDate.now();

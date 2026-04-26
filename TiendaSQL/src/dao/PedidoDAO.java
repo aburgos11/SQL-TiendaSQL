@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import models.Cliente;
 import models.Pedido;
 import models.Producto;
@@ -51,21 +50,22 @@ public class PedidoDAO {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     public boolean actualizarPedido(int id_pedido, int cantidad, LocalDate fecha) {
         String sql = "UPDATE pedidos SET cantidad = ?, fecha = ? WHERE id = ?";
         try (Connection conn = Conexion.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setInt(1, cantidad);
             pstmt.setDate(2, java.sql.Date.valueOf(fecha));
             pstmt.setInt(3, id_pedido);
             return pstmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
         return false;
     }
@@ -78,7 +78,7 @@ public class PedidoDAO {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return false;
     }
 }
